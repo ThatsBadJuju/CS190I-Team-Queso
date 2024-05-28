@@ -9,6 +9,7 @@ TagManager:
   - lb_groundTarget
   - lb_perchTarget
   - whistle_area
+  - buoy_area
   layers:
   - Default
   - TransparentFX

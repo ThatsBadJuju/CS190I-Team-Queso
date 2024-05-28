@@ -7,11 +7,15 @@ public class changeColor : MonoBehaviour
     public Vector3 originalLocalScale;
     public GameObject area;
     public bool isInArea = false;
+    public Vector3 origPosition;
+    public Quaternion origRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         originalLocalScale = GetComponent<Transform>().localScale;
+        origPosition = transform.localPosition;
+        origRotation = transform.localRotation;
     }
 
     // Update is called once per frame
@@ -32,7 +36,8 @@ public class changeColor : MonoBehaviour
         //GetComponent<Renderer>().material.color = Color.red;
         //Debug.Log("Picked Up");
         area.SetActive(true);
-        //TODO: turn on gravity
+        GetComponent<Rigidbody>().useGravity = true;
+        UnFreeze();
     }
 
     void ChangeColorBack()
@@ -43,12 +48,15 @@ public class changeColor : MonoBehaviour
         {
             // do whistle action
             Debug.Log("success");
+            ResetPosition();
         }
         else
         {
             // return to starting point
+            ResetPosition();
         }
-        //TODO: turn off gravity
+        GetComponent<Rigidbody>().useGravity = false;
+        Freeze();
         area.SetActive(false);
     }
 
@@ -68,5 +76,24 @@ public class changeColor : MonoBehaviour
             area.GetComponent<WhistleArea>().ChangeColorRed();
             isInArea = false;
         }
+    }
+
+    private void ResetPosition()
+    {
+        transform.localPosition = origPosition;
+        transform.localRotation = origRotation;
+    }
+    private void Freeze()
+    {
+        GetComponent<Rigidbody>().constraints = 
+            RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ |
+            RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationY |
+            RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationX
+            ;
+    }
+
+    private void UnFreeze()
+    {
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 }
