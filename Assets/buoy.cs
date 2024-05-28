@@ -20,15 +20,9 @@ public class buoy : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("DINK");
         Debug.Log(collision.gameObject.tag);
-
-
-
         if (collision.gameObject.CompareTag("Human"))
         {
-            // Play the audio clip
-            Debug.Log("DINK");
             score += 1;
         }
     }
