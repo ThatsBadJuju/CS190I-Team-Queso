@@ -5017,6 +5017,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 5836331764715293251, guid: 462c2619e4d82cb4ba4a74d473f04b6b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6291472137541943058, guid: 462c2619e4d82cb4ba4a74d473f04b6b,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -6270,7 +6275,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 1313711679}
   m_CameraFloorOffsetObject: {fileID: 650672841}
   m_RequestedTrackingOriginMode: 1
-  m_CameraYOffset: 0.5
+  m_CameraYOffset: 0.6
 --- !u!4 &1313711681
 Transform:
   m_ObjectHideFlags: 0
@@ -6314,7 +6319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_System: {fileID: 1313711682}
-  m_MoveSpeed: 2
+  m_MoveSpeed: 3
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_UseGravity: 1
