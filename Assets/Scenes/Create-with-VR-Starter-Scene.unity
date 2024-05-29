@@ -1722,6 +1722,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 560943801}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &346992879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 806811748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8806150b481b8f543a5774ddeb2d013a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &347009690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3382,6 +3394,7 @@ MonoBehaviour:
   isInArea: 0
   origPosition: {x: 0, y: 0, z: 0}
   origRotation: {x: 0, y: 0, z: 0, w: 0}
+  dialogue: {fileID: 0}
 --- !u!114 &560943796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5204,6 +5217,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
+        type: 3}
+      propertyPath: buoy
+      value: 
+      objectReference: {fileID: 1274109860}
+    - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
+        type: 3}
+      propertyPath: buoyObject
+      value: 
+      objectReference: {fileID: 1274109860}
+    - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
+        type: 3}
+      propertyPath: buoyScript
+      value: 
+      objectReference: {fileID: 1274109862}
+    - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
+        type: 3}
+      propertyPath: textAnimationSpeed
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 6449296285829880521, guid: 66a0aba2ba55058439c92574558222ac,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7503,6 +7536,7 @@ MonoBehaviour:
   isInArea: 0
   origPosition: {x: 0, y: 0, z: 0}
   origRotation: {x: 0, y: 0, z: 0, w: 0}
+  dialogue: {fileID: 346992879}
 --- !u!114 &1274109863
 MonoBehaviour:
   m_ObjectHideFlags: 0
