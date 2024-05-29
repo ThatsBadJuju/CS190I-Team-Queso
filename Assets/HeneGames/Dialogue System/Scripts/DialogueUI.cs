@@ -52,6 +52,9 @@ namespace HeneGames.DialogueSystem
         [Header("Next sentence input")]
         public KeyCode actionInput = KeyCode.Space;
 
+        [Header("Cancel input")]
+        public KeyCode cancelInput = KeyCode.Escape;
+
         private void Update()
         {
             //Delay timer
@@ -70,6 +73,8 @@ namespace HeneGames.DialogueSystem
             {
                 NextSentenceSoft();
             }
+
+            //
         }
 
         /// <summary>
