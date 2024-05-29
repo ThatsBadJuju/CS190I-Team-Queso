@@ -49,11 +49,14 @@ namespace HeneGames.DialogueSystem
         [Range(0.1f, 1f)]
         [SerializeField] private float textAnimationSpeed = 0.5f;
 
-        [Header("Next sentence input")]
+        [Header("Action input")]
         public KeyCode actionInput = KeyCode.Space;
 
-        [Header("Cancel input")]
-        public KeyCode cancelInput = KeyCode.Escape;
+        [Header("Force skip input")]
+        public KeyCode skipInput = KeyCode.Escape;
+
+        public GameObject buoyObject;
+        public buoy buoyScript;
 
         private void Update()
         {
@@ -73,8 +76,10 @@ namespace HeneGames.DialogueSystem
             {
                 NextSentenceSoft();
             }
-
-            //
+            else if(Input.GetKeyDown(skipInput))
+            {
+                NextSentenceHard();
+            }
         }
 
         /// <summary>
@@ -114,6 +119,18 @@ namespace HeneGames.DialogueSystem
             if (lastSentence)
             {
                 currentDialogueManager = null;
+            }
+        }
+
+        public void NextSentenceIfBuoy()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if(currentDialogueManager.GetSentenceIndex() == 3)
+            {
+                NextSentenceHard();
             }
         }
 
