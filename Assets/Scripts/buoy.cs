@@ -76,9 +76,9 @@ public class buoy : MonoBehaviour
         //Debug.Log("Dropped");
         if (isInArea)
         {
-            // do whistle action
             Debug.Log("success");
             score += 1;
+            Debug.Log("SCORE: " + score);
             ResetPosition();
         }
         else
