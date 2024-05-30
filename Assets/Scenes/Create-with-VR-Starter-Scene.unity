@@ -5217,8 +5217,11 @@ MonoBehaviour:
   sentences:
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
-    sentence: Hello. I am your instructor today, and I will be introducing our VR
+    sentence: 'Hello. I am your instructor today, and I will be introducing our VR
       lifeguard simulator tutorial.
+
+
+      (Space to continue)'
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -5262,7 +5265,19 @@ MonoBehaviour:
     sentenceSound: {fileID: 0}
     sentenceEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
     sentence: "Next, use [grab key] to hold the whistle. \nBlow the whistle with
@@ -5275,7 +5290,7 @@ MonoBehaviour:
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
     sentence: "Next, use [grab key] to hold the whistle. \nBlow the whistle with
-      [whistle key] to stop a running person."
+      [whistle key] to stop a running person.\n\n(Press escape to end the task!)"
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -5320,6 +5335,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2338859298468319739, guid: 66a0aba2ba55058439c92574558222ac,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
         type: 3}
       propertyPath: buoy

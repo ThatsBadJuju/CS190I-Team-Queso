@@ -31,10 +31,11 @@ namespace HeneGames.DialogueSystem
 
         #endregion
 
-        private DialogueManager currentDialogueManager;
+        public DialogueManager currentDialogueManager;
         private bool typing;
         private string currentMessage;
         private float startDialogueDelayTimer;
+        private float escapeTimer;
 
         [Header("References")]
         [SerializeField] private Image portrait;
@@ -58,12 +59,21 @@ namespace HeneGames.DialogueSystem
         public GameObject buoyObject;
         public buoy buoyScript;
 
+        private int buoyTextIndex = 3;
+        private int whistleTextIndex = 5;
+        private int escapeIndex = 6;
+
         private void Update()
         {
             //Delay timer
             if(startDialogueDelayTimer > 0f)
             {
                 startDialogueDelayTimer -= Time.deltaTime;
+            }
+            //Escape delay timer
+            if(escapeTimer >= 0f && currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
+            {
+                escapeTimer -= Time.deltaTime;
             }
 
             InputUpdate();
@@ -72,11 +82,16 @@ namespace HeneGames.DialogueSystem
         public virtual void InputUpdate()
         {
             //Next dialogue input
-            if (Input.GetKeyDown(actionInput))
+            int sentenceIndex = currentDialogueManager.GetSentenceIndex();
+            if (Input.GetKeyDown(actionInput) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
             {
                 NextSentenceSoft();
             }
             else if(Input.GetKeyDown(skipInput))
+            {
+                NextSentenceHard();
+            }
+            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex)
             {
                 NextSentenceHard();
             }
@@ -128,7 +143,7 @@ namespace HeneGames.DialogueSystem
                 return;
 
             //Hardcoding the index of the buoy sentence, change if necessary
-            if(currentDialogueManager.GetSentenceIndex() == 3)
+            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
             {
                 NextSentenceHard();
             }
@@ -155,6 +170,11 @@ namespace HeneGames.DialogueSystem
             portrait.sprite = _dialogueCharacter.characterPhoto;
             nameText.text = _dialogueCharacter.characterName;
             currentMessage = _message;
+
+            if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
+            {
+                escapeTimer = 20f;
+            }
 
             if (animateText)
             {
