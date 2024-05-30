@@ -56,24 +56,24 @@ namespace HeneGames.DialogueSystem
                 timeSinceLastInput = Time.time;
             }
             //Start dialogue by input
-            if (OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed() && dialogueTrigger != null && !dialogueIsOn)
-            {
-                //Trigger event inside DialogueTrigger component
-                if (dialogueTrigger != null)
-                {
-                    dialogueTrigger.startDialogueEvent.Invoke();
-                }
+            // if (OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed() && dialogueTrigger != null && !dialogueIsOn)
+            // {
+            //     //Trigger event inside DialogueTrigger component
+            //     if (dialogueTrigger != null)
+            //     {
+            //         dialogueTrigger.startDialogueEvent.Invoke();
+            //     }
 
-                startDialogueEvent.Invoke();
+            //     startDialogueEvent.Invoke();
 
-                //If component found start dialogue
-                DialogueUI.instance.StartDialogue(this);
+            //     //If component found start dialogue
+            //     DialogueUI.instance.StartDialogue(this);
 
-                //Hide interaction UI
-                DialogueUI.instance.ShowInteractionUI(false);
+            //     //Hide interaction UI
+            //     DialogueUI.instance.ShowInteractionUI(false);
 
-                dialogueIsOn = true;
-            }
+            //     dialogueIsOn = true;
+            // }
         }
 
         //Start dialogue by trigger
