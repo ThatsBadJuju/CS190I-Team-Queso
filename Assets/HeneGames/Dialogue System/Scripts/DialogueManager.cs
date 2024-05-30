@@ -32,9 +32,13 @@ namespace HeneGames.DialogueSystem
         [Header("Dialogue")]
         [SerializeField] private TriggerState triggerState;
         [SerializeField] private List<NPC_Sentence> sentences = new List<NPC_Sentence>();
+        abutton abut;
+
         private void Start() {
             score = GameObject.Find("Scoreboard").GetComponent<Score>();
             timeSinceLastInput = Time.time;
+            abut = GameObject.Find("Abutton").GetComponent<abutton>();
+
         }
         private void Update()
         {
@@ -48,11 +52,11 @@ namespace HeneGames.DialogueSystem
             if(Time.time - timeSinceLastInput > 5.0f) {
                 score.scoreText.text += "Look at the Trainer NPC and hit A";
             }
-            if(OVRInput.GetDown(OVRInput.Button.One)) {
+            if(OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) {
                 timeSinceLastInput = Time.time;
             }
             //Start dialogue by input
-            if (OVRInput.GetDown(OVRInput.Button.One) && dialogueTrigger != null && !dialogueIsOn)
+            if (OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed() && dialogueTrigger != null && !dialogueIsOn)
             {
                 //Trigger event inside DialogueTrigger component
                 if (dialogueTrigger != null)

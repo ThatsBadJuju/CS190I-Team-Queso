@@ -12,6 +12,8 @@ namespace HeneGames.DialogueSystem
         #region Singleton
 
         public static DialogueUI instance { get; private set; }
+        abutton abut;
+        bbutton bbut;
 
         private void Awake()
         {
@@ -28,6 +30,8 @@ namespace HeneGames.DialogueSystem
             //Hide dialogue and interaction UI at awake
             dialogueWindow.SetActive(false);
             interactionUI.SetActive(false);
+            abut = GameObject.Find("Abutton").GetComponent<abutton>();
+            bbut = GameObject.Find("bbutton").GetComponent<bbutton>();
         }
 
         #endregion
@@ -88,15 +92,15 @@ namespace HeneGames.DialogueSystem
         {
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One)) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
             {
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two))
+            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
             {
                 NextSentenceHard();
             }
-            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.GetDown(OVRInput.Button.Two))
+            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
             {
                 NextSentenceHard();
             }
