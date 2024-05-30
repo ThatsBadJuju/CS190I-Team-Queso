@@ -6381,8 +6381,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
-  m_fontSizeBase: 2
+  m_fontSize: 1
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6639,7 +6639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89b2c8d34df52d4e89cba040401d38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 0}
   audioSource: {fileID: 0}
   startDialogueEvent:
     m_PersistentCalls:
