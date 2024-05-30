@@ -50,6 +50,8 @@ namespace HeneGames.DialogueSystem
         [Range(0.1f, 1f)]
         [SerializeField] private float textAnimationSpeed = 0.5f;
 
+        public VRInputSystem vrInput;
+
         [Header("Action input")]
         public KeyCode actionInput = KeyCode.Space;
 
@@ -84,11 +86,11 @@ namespace HeneGames.DialogueSystem
         {
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if (Input.GetKeyDown(actionInput) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
             {
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput))
+            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown)
             {
                 NextSentenceHard();
             }
