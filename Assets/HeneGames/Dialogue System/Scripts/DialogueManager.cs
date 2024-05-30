@@ -27,6 +27,7 @@ namespace HeneGames.DialogueSystem
         public UnityEvent startDialogueEvent;
         public UnityEvent nextSentenceDialogueEvent;
         public UnityEvent endDialogueEvent;
+        // public UnityEvent cubeGrabbedEvent;
 
         [Header("Dialogue")]
         [SerializeField] private TriggerState triggerState;
@@ -34,6 +35,12 @@ namespace HeneGames.DialogueSystem
         private void Start() {
             score = GameObject.Find("Scoreboard").GetComponent<Score>();
             timeSinceLastInput = Time.time;
+            
+            // if (cubeGrabbedEvent == null)
+            // {
+            //     cubeGrabbedEvent = new UnityEvent();
+            // }
+            // cubeGrabbedEvent.AddListener(OnCubeGrabbed);
         }
         private void Update()
         {
@@ -69,6 +76,39 @@ namespace HeneGames.DialogueSystem
                 dialogueIsOn = true;
             }
         }
+
+        // private void OnCubeGrabbed()
+        // {
+        //     Debug.Log("Cube grabbed event triggered");  // Debug log
+        //     if (dialogueTrigger != null && !dialogueIsOn)
+        //     {
+        //         // NextSentence(out bool lastSentence);
+        //         // Debug.Log("Next sentence called");  // Debug log
+        //         // if (lastSentence)
+        //         // {
+        //         //     Debug.Log("Last sentence reached");  // Debug log
+        //         // }
+        //         //Trigger event inside DialogueTrigger component
+        //         if (dialogueTrigger != null)
+        //         {
+        //             dialogueTrigger.startDialogueEvent.Invoke();
+        //         }
+
+        //         startDialogueEvent.Invoke();
+
+        //         //If component found start dialogue
+        //         DialogueUI.instance.StartDialogue(this);
+
+        //         //Hide interaction UI
+        //         DialogueUI.instance.ShowInteractionUI(false);
+
+        //         dialogueIsOn = true;
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Dialogue is not on");  // Debug log
+        //     }
+        // }
 
         //Start dialogue by trigger
         private void OnTriggerEnter(Collider other)

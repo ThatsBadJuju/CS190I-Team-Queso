@@ -84,6 +84,11 @@ namespace HeneGames.DialogueSystem
 
         public virtual void InputUpdate()
         {
+            if (CubeGrab.isGrabbed && currentDialogueManager != null)
+                NextSentenceSoft();
+            }
+
+
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
             if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)

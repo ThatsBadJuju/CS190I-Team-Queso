@@ -44,14 +44,14 @@ public class Waypoints : MonoBehaviour
 
     public void StartWalking()
     {
-        Debug.Log("Start Walking");
+        // Debug.Log("Start Walking");
         speed = walkSpeed;
         UpdateAnimator();
     }
 
     public void StartRunning()
     {
-        Debug.Log("Start Running");
+        // Debug.Log("Start Running");
         speed = runSpeed;
         UpdateAnimator();
     }
@@ -60,7 +60,7 @@ public class Waypoints : MonoBehaviour
     {
         if (animator != null)
         {
-            Debug.Log("Updating Animator with Speed: " + speed);
+            // Debug.Log("Updating Animator with Speed: " + speed);
             animator.SetFloat("Speed", speed);
         }
     }

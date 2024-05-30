@@ -45,7 +45,7 @@ public class Swimmer : MonoBehaviour
     {
         if (animator != null)
         {
-            Debug.Log("Updating Animator with Drown: " + drown);
+            // Debug.Log("Updating Animator with Drown: " + drown);
             animator.SetBool("drown", drown);
         }
     }
