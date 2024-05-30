@@ -46,11 +46,11 @@ namespace HeneGames.DialogueSystem
             if(Time.time - timeSinceLastInput > 5.0f) {
                 score.scoreText.text += "Look at the Trainer NPC and hit A";
             }
-            if(Input.GetKeyDown(DialogueUI.instance.actionInput)) {
+            if(OVRInput.Get(OVRInput.Button.One)) {
                 timeSinceLastInput = Time.time;
             }
             //Start dialogue by input
-            if (Input.GetKeyDown(DialogueUI.instance.actionInput) && dialogueTrigger != null && !dialogueIsOn || OVRInput.Get(OVRInput.Button.One))
+            if (OVRInput.Get(OVRInput.Button.One) && dialogueTrigger != null && !dialogueIsOn)
             {
                 //Trigger event inside DialogueTrigger component
                 if (dialogueTrigger != null)
