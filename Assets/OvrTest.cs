@@ -12,9 +12,9 @@ public class OvrTest : MonoBehaviour
     void Update()
     {
 
-        if (currentInteractor.GetComponent<ActionBasedController>().activateAction.action.ReadValue<float>() > 0.5f)
-        {
-            Debug.Log("trigger pressed");
+        if (OVRInput.Get(OVRInput.Button.One)){
+            Debug.Log("A button pressed");
         }
+
     }
 }

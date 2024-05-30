@@ -50,7 +50,7 @@ namespace HeneGames.DialogueSystem
                 timeSinceLastInput = Time.time;
             }
             //Start dialogue by input
-            if (Input.GetKeyDown(DialogueUI.instance.actionInput) && dialogueTrigger != null && !dialogueIsOn)
+            if (Input.GetKeyDown(DialogueUI.instance.actionInput) && dialogueTrigger != null && !dialogueIsOn || OVRInput.Get(OVRInput.Button.One))
             {
                 //Trigger event inside DialogueTrigger component
                 if (dialogueTrigger != null)

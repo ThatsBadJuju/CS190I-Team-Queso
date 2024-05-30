@@ -60,7 +60,7 @@ public class Waypoints : MonoBehaviour
     {
         if (animator != null)
         {
-            Debug.Log("Updating Animator with Speed: " + speed);
+            // Debug.Log("Updating Animator with Speed: " + speed);
             animator.SetFloat("Speed", speed);
         }
     }
