@@ -37,6 +37,7 @@ namespace HeneGames.DialogueSystem
         }
         private void Update()
         {
+            OVRInput.Update();
             //Timer
             if(coolDownTimer > 0f)
             {

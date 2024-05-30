@@ -80,6 +80,7 @@ namespace HeneGames.DialogueSystem
             }
 
             InputUpdate();
+            OVRInput.Update();
         }
 
         public virtual void InputUpdate()
