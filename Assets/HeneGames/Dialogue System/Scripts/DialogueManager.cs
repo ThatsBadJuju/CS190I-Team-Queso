@@ -42,7 +42,6 @@ namespace HeneGames.DialogueSystem
             {
                 coolDownTimer -= Time.deltaTime;
             }
-            Debug.Log(timeSinceLastInput);
 
             if(Time.time - timeSinceLastInput > 5.0f) {
                 score.scoreText.text += "Look at the Trainer NPC and hit [dialogue input]";
