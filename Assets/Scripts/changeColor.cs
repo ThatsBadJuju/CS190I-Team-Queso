@@ -9,6 +9,7 @@ public class changeColor : MonoBehaviour
     public bool isInArea = false;
     public Vector3 origPosition;
     public Quaternion origRotation;
+    public Waypoints waypoints;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,7 @@ public class changeColor : MonoBehaviour
         {
             // do whistle action
             Debug.Log("success");
+            waypoints.StartWalking();
             ResetPosition();
         }
         else
