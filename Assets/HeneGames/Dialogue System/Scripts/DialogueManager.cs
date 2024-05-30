@@ -49,6 +49,10 @@ namespace HeneGames.DialogueSystem
             if(OVRInput.GetDown(OVRInput.Button.One)) {
                 timeSinceLastInput = Time.time;
             }
+            if (OVRInput.GetDown(OVRInput.Button.One))
+            {
+                Debug.Log("Button.One is pressed down");
+            }
             //Start dialogue by input
             if (OVRInput.GetDown(OVRInput.Button.One) && dialogueTrigger != null && !dialogueIsOn)
             {
