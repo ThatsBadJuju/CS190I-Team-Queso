@@ -14424,6 +14424,7 @@ MonoBehaviour:
   isInArea: 0
   origPosition: {x: 0, y: 0, z: 0}
   origRotation: {x: 0, y: 0, z: 0, w: 0}
+  waypoints: {fileID: 1153676388}
 --- !u!4 &2077493830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5471a626def5c4f4e9a3d65e76d27d95,
@@ -14832,7 +14833,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1304065734}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2134827868
 GameObject:
@@ -15043,3 +15044,4 @@ SceneRoots:
   - {fileID: 1672267663}
   - {fileID: 813606155}
   - {fileID: 1460248259}
+  - {fileID: 1735264986}

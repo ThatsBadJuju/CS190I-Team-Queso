@@ -14,16 +14,6 @@ public class Waypoints : MonoBehaviour
 
     private Animator animator;
 
-    void OnEnable()
-    {
-        Whistle.OnWhistleGrabbed += StartWalking; // Subscribe to the grab event
-    }
-
-    void OnDisable()
-    {
-        Whistle.OnWhistleGrabbed -= StartWalking; // Unsubscribe from the grab event
-    }
-
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -52,7 +42,7 @@ public class Waypoints : MonoBehaviour
         UpdateAnimator();
     }
 
-    void StartWalking()
+    public void StartWalking()
     {
         Debug.Log("Start Walking");
         speed = walkSpeed;
