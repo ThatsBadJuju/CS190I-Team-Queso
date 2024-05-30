@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static OVRInput;
 
 namespace HeneGames.DialogueSystem
 {
@@ -87,15 +88,15 @@ namespace HeneGames.DialogueSystem
         {
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.Get(OVRInput.Button.One)) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One)) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
             {
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.Get(OVRInput.Button.Two))
+            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two))
             {
                 NextSentenceHard();
             }
-            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.Get(OVRInput.Button.Two))
+            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.GetDown(OVRInput.Button.Two))
             {
                 NextSentenceHard();
             }
