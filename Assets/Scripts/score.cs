@@ -7,7 +7,7 @@ public class score : MonoBehaviour
 {
     buoy buoy; // Reference to the Text component in Unity Editor
     int totalScore;
-    TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText;
     void Start()
     {
         buoy = GameObject.Find("Lifeguard_Buoy").GetComponent<buoy>();
