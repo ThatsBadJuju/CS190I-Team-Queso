@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "com.meta.xr.sdk.interaction.ovr": "^1.0.0"
+  }
+}

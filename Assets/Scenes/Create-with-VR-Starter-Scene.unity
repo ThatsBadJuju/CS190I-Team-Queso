@@ -6795,7 +6795,7 @@ MonoBehaviour:
       lifeguard simulator tutorial.
 
 
-      (Space to continue)'
+      (A to continue)'
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -6823,7 +6823,7 @@ MonoBehaviour:
         m_Calls: []
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
-    sentence: 'Next, use [grab key] to grab the life buoy from your inventory. '
+    sentence: 'Next, use the Grab key to grab the life buoy from your inventory. '
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -6831,7 +6831,7 @@ MonoBehaviour:
         m_Calls: []
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
-    sentence: 'You can drop the buoy by releasing [grab key].
+    sentence: 'You can drop the buoy by releasing the Grab key.
 
       Drop the buoy
       on the sphere surrounding drowning person to "save" them.'
@@ -6857,7 +6857,7 @@ MonoBehaviour:
     sentence: 'Good job!
 
 
-      Now, use [grab key] to hold the whistle. '
+      Now, use Grab to hold the whistle. '
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -6865,7 +6865,8 @@ MonoBehaviour:
         m_Calls: []
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
-    sentence: Blow the whistle with [whistle key] to stop the running person.
+    sentence: Blow the whistle by dropping the whistle in the highlighted area to
+      stop the running person.
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -6873,7 +6874,7 @@ MonoBehaviour:
         m_Calls: []
   - dialogueCharacter: {fileID: 11400000, guid: 7cc6ef3d2da983445848354440828713,
       type: 2}
-    sentence: Press [secondary button] to end the whistle task!
+    sentence: Press B to end the whistle task!
     skipDelayTime: 0
     sentenceSound: {fileID: 0}
     sentenceEvent:
@@ -13547,6 +13548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1937780098}
   - component: {fileID: 1937780097}
+  - component: {fileID: 1937780099}
   m_Layer: 0
   m_Name: VR Input System
   m_TagString: Untagged
@@ -13591,6 +13593,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1937780099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937780096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65941065db05e43c1b7d49d6cf129ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightHand: {fileID: 0}
+  currentInteractor: {fileID: 712900736}
+  button: 0
 --- !u!1 &1949443462
 GameObject:
   m_ObjectHideFlags: 0
