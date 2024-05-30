@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Whistle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public delegate void WhistleGrabbedEventHandler();
+    public static event WhistleGrabbedEventHandler OnWhistleGrabbed;
+
+    void OnEnable()
     {
-        
+        getGrabbed.OnGrabbed += HandleGrabbed;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        getGrabbed.OnGrabbed -= HandleGrabbed;
+    }
+
+    private void HandleGrabbed()
+    {
+        Debug.Log("Whistle grabbed!");
+        OnWhistleGrabbed?.Invoke();
     }
 }

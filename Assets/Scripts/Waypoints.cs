@@ -14,15 +14,15 @@ public class Waypoints : MonoBehaviour
 
     private Animator animator;
 
-    // void OnEnable()
-    // {
-    //     Whistle.OnWhistleBlown += StartRunning;
-    // }
+    void OnEnable()
+    {
+        Whistle.OnWhistleGrabbed += StartWalking; // Subscribe to the grab event
+    }
 
-    // void OnDisable()
-    // {
-    //     Whistle.OnWhistleBlown -= StartRunning;
-    // }
+    void OnDisable()
+    {
+        Whistle.OnWhistleGrabbed -= StartWalking; // Unsubscribe from the grab event
+    }
 
     void Start()
     {
@@ -31,7 +31,8 @@ public class Waypoints : MonoBehaviour
         {
             Debug.LogError("Animator component not found on the GameObject.");
         }
-        speed = walkSpeed;    
+        speed = runSpeed; // Start with running speed
+        UpdateAnimator();
     }
 
     void Update()
@@ -51,15 +52,17 @@ public class Waypoints : MonoBehaviour
         UpdateAnimator();
     }
 
-    void StartRunning()
+    void StartWalking()
     {
-        speed = runSpeed;
+        Debug.Log("Start Walking");
+        speed = walkSpeed;
         UpdateAnimator();
     }
 
-    public void StartWalking()
+    public void StartRunning()
     {
-        speed = walkSpeed;
+        Debug.Log("Start Running");
+        speed = runSpeed;
         UpdateAnimator();
     }
 
@@ -67,6 +70,7 @@ public class Waypoints : MonoBehaviour
     {
         if (animator != null)
         {
+            Debug.Log("Updating Animator with Speed: " + speed);
             animator.SetFloat("Speed", speed);
         }
     }
