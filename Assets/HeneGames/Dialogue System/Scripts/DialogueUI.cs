@@ -84,8 +84,8 @@ namespace HeneGames.DialogueSystem
                 escapeTimer -= Time.deltaTime;
             }
 
-            InputUpdate();
             OVRInput.Update();
+            InputUpdate();
         }
 
         public virtual void InputUpdate()
