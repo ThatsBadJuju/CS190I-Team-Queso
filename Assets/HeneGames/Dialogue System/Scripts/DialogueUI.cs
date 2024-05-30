@@ -91,11 +91,11 @@ namespace HeneGames.DialogueSystem
             {
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.Get(OVRInput.Button.One))
+            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.Get(OVRInput.Button.Two))
             {
                 NextSentenceHard();
             }
-            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.Get(OVRInput.Button.One))
+            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.Get(OVRInput.Button.Two))
             {
                 NextSentenceHard();
             }
