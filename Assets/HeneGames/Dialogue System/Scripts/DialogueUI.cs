@@ -79,7 +79,7 @@ namespace HeneGames.DialogueSystem
                 startDialogueDelayTimer -= Time.deltaTime;
             }
             //Escape delay timer
-            if(escapeTimer >= 0f && currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
+            if(escapeTimer >= 0f)
             {
                 escapeTimer -= Time.deltaTime;
             }
@@ -100,7 +100,7 @@ namespace HeneGames.DialogueSystem
             {
                 NextSentenceHard();
             }
-            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
+            else if(escapeTimer <= 0f || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
             {
                 NextSentenceHard();
             }
@@ -187,10 +187,7 @@ namespace HeneGames.DialogueSystem
                 swimmer.setDrown(true);
             }
 
-            if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
-            {
-                escapeTimer = 20f;
-            }
+            escapeTimer = 10f;
 
             if (animateText)
             {
