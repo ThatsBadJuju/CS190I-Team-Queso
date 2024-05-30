@@ -86,15 +86,15 @@ namespace HeneGames.DialogueSystem
         {
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.Get(OVRInput.Button.One)) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
             {
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown)
+            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.Get(OVRInput.Button.One))
             {
                 NextSentenceHard();
             }
-            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex)
+            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex || OVRInput.Get(OVRInput.Button.One))
             {
                 NextSentenceHard();
             }
