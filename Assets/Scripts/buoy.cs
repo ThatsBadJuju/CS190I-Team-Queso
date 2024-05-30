@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HeneGames.DialogueSystem;
 
 public class buoy : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class buoy : MonoBehaviour
     public bool isInArea = false;
     public Vector3 origPosition;
     public Quaternion origRotation;
+    public DialogueUI dialogue;
 
     void Start()
     {
@@ -77,6 +79,7 @@ public class buoy : MonoBehaviour
         if (isInArea)
         {
             Debug.Log("success");
+            dialogue.NextSentenceIfBuoy();
             score += 1;
             Debug.Log("SCORE: " + score);
             ResetPosition();
