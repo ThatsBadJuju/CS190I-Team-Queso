@@ -11,7 +11,7 @@ namespace HeneGames.DialogueSystem
         private float coolDownTimer;
         private bool dialogueIsOn;
         private DialogueTrigger dialogueTrigger;
-        score score;
+        Score score;
         private float timeSinceLastInput;
 
         public enum TriggerState
@@ -32,7 +32,7 @@ namespace HeneGames.DialogueSystem
         [SerializeField] private TriggerState triggerState;
         [SerializeField] private List<NPC_Sentence> sentences = new List<NPC_Sentence>();
         private void Start() {
-            score = GameObject.Find("Scoreboard").GetComponent<score>();
+            score = GameObject.Find("Scoreboard").GetComponent<Score>();
             timeSinceLastInput = Time.time;
         }
         private void Update()
@@ -42,10 +42,9 @@ namespace HeneGames.DialogueSystem
             {
                 coolDownTimer -= Time.deltaTime;
             }
-            Debug.Log(timeSinceLastInput);
 
             if(Time.time - timeSinceLastInput > 5.0f) {
-                score.scoreText.text += "Look at the Trainer NPC and hit [dialogue input]";
+                score.scoreText.text += "Look at the Trainer NPC and hit space";
             }
             if(Input.GetKeyDown(DialogueUI.instance.actionInput)) {
                 timeSinceLastInput = Time.time;
