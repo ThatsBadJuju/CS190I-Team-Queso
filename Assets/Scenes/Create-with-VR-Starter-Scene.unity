@@ -6742,8 +6742,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 21.979532, y: 2.0746455, z: 19.090427}
-  m_Center: {x: -1.9398193, y: 0.79299164, z: 5.4988294}
+  m_Size: {x: 21.979532, y: 4.707857, z: 22.89644}
+  m_Center: {x: -1.9398195, y: 0.4615544, z: 3.59581}
 --- !u!4 &784713858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
@@ -13598,7 +13598,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924059440}
+  m_GameObject: {fileID: 1949443462}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.2945755, y: -1, z: 0.12753487}
@@ -14209,6 +14209,11 @@ PrefabInstance:
       propertyPath: swimmer
       value: 
       objectReference: {fileID: 1069733575}
+    - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
+        type: 3}
+      propertyPath: vrInput
+      value: 
+      objectReference: {fileID: 1937780097}
     - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
         type: 3}
       propertyPath: buoyObject
