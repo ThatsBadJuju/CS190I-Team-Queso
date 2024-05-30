@@ -58,6 +58,7 @@ namespace HeneGames.DialogueSystem
 
         public GameObject buoyObject;
         public buoy buoyScript;
+        public Swimmer swimmer;
 
         private int buoyTextIndex = 3;
         private int whistleTextIndex = 5;
@@ -142,6 +143,8 @@ namespace HeneGames.DialogueSystem
             if (currentDialogueManager == null)
                 return;
 
+            swimmer.setDrown(false);
+
             //Hardcoding the index of the buoy sentence, change if necessary
             if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
             {
@@ -170,6 +173,11 @@ namespace HeneGames.DialogueSystem
             portrait.sprite = _dialogueCharacter.characterPhoto;
             nameText.text = _dialogueCharacter.characterName;
             currentMessage = _message;
+
+            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            {
+                swimmer.setDrown(true);
+            }
 
             if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
             {
