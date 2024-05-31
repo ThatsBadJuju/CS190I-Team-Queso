@@ -107,6 +107,7 @@ public class buoy : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
         menuBuoy.inMenu = false;
+        buoyTimer = 0f;
     }
 
     void ChangeColorBack()
