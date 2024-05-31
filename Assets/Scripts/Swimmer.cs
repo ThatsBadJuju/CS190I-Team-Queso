@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion.Fluid;
 
 public class Swimmer : MonoBehaviour
 {
+    public ComplexFluidInteractor fluidInteractor;
     private Animator animator;
-    bool drown;
+    public bool drown;
 
     void Start()
     {
@@ -15,7 +17,6 @@ public class Swimmer : MonoBehaviour
             Debug.LogError("Animator component not found on the GameObject.");
         }
         drown = false; // Start with walking speed
-        
 
         // StartCoroutine(ToggleDrown());
     }
@@ -39,6 +40,14 @@ public class Swimmer : MonoBehaviour
 
     public void setDrown(bool set) {
         drown = set;
+        if (set)
+        {
+            fluidInteractor.floatStrength = 0.5f;
+        }
+        else
+        {
+            fluidInteractor.floatStrength = 2.0f;
+        }
     }
 
     void UpdateAnimator()

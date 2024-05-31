@@ -15,6 +15,7 @@ public class buoy : MonoBehaviour
     public Quaternion origRotation;
     public DialogueUI dialogue;
     public MenuBuoy menuBuoy;
+    public Swimmer swimmer;
 
     private float buoyTimer;
 
@@ -51,7 +52,7 @@ public class buoy : MonoBehaviour
             buoyTimer -= Time.deltaTime;
         }
 
-        if (isInArea)
+        if (isInArea && area.activeSelf)
         {
             Debug.Log("success");
             dialogue.NextSentenceIfBuoy();
@@ -103,7 +104,10 @@ public class buoy : MonoBehaviour
         //GetComponent<Renderer>().material.color = Color.red;
         Debug.Log("Picked Up");
         dialogue.NextSentenceIfBuoyGrab();
-        area.SetActive(true);
+        if (swimmer.drown)
+        {
+            area.SetActive(true);
+        }
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
         menuBuoy.inMenu = false;
