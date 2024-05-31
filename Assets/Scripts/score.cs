@@ -10,7 +10,7 @@ public class Score : MonoBehaviour
     public TextMeshProUGUI scoreText;
     void Start()
     {
-        buoy = GameObject.Find("Lifeguard_Buoy").GetComponent<buoy>();
+        buoy = GameObject.Find("Menu_Buoy").GetComponent<buoy>();
         totalScore = 0;
         scoreText = GetComponent<TextMeshProUGUI>();
     }

@@ -14,6 +14,9 @@ public class buoy : MonoBehaviour
     public Vector3 origPosition;
     public Quaternion origRotation;
     public DialogueUI dialogue;
+    public MenuBuoy menuBuoy;
+
+    private float buoyTimer;
 
     void Start()
     {
@@ -22,7 +25,8 @@ public class buoy : MonoBehaviour
         origRotation = transform.localRotation;
 
         score = 0;
-        
+
+        buoyTimer = 0f;
     }
 
     void OnEnable()
@@ -42,8 +46,39 @@ public class buoy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(buoyTimer > 0f)
+        {
+            buoyTimer -= Time.deltaTime;
+        }
+
+        if (isInArea)
+        {
+            Debug.Log("success");
+            dialogue.NextSentenceIfBuoy();
+            score += 1;
+            Debug.Log("SCORE: " + score);
+            ResetPosition();
+            //GetComponent<Rigidbody>().useGravity = false;
+            Freeze();
+            area.SetActive(false);
+            menuBuoy.inMenu = true;
+
+            area.GetComponent<BuoyArea>().ChangeColorRed();
+            isInArea = false;
+        }
+        else if(buoyTimer < 0f)
+        {
+            ResetPosition();
+            //GetComponent<Rigidbody>().useGravity = false;
+            Freeze();
+            area.SetActive(false);
+            menuBuoy.inMenu = true;
+            area.GetComponent<BuoyArea>().ChangeColorRed();
+            isInArea = false;
+            buoyTimer = 0f;
+        }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "buoy_area")
@@ -66,33 +101,35 @@ public class buoy : MonoBehaviour
     void ChangeColor()
     {
         //GetComponent<Renderer>().material.color = Color.red;
-        //Debug.Log("Picked Up");
+        Debug.Log("Picked Up");
         dialogue.NextSentenceIfBuoyGrab();
         area.SetActive(true);
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
+        menuBuoy.inMenu = false;
     }
 
     void ChangeColorBack()
     {
         //GetComponent<Renderer>().material.color = Color.blue;
-        //Debug.Log("Dropped");
-        if (isInArea)
-        {
-            Debug.Log("success");
-            dialogue.NextSentenceIfBuoy();
-            score += 1;
-            Debug.Log("SCORE: " + score);
-            ResetPosition();
-        }
-        else
-        {
-            // return to starting point
-            ResetPosition();
-        }
-        GetComponent<Rigidbody>().useGravity = false;
-        Freeze();
-        area.SetActive(false);
+        Debug.Log("Dropped");
+        buoyTimer = 3f;
+        //if (isInArea)
+        //{
+        //    Debug.Log("success");
+        //    dialogue.NextSentenceIfBuoy();
+        //    score += 1;
+        //    Debug.Log("SCORE: " + score);
+        //    ResetPosition();
+        //}
+        //else
+        //{
+        //    // return to starting point
+        //    ResetPosition();
+        //}
+        //GetComponent<Rigidbody>().useGravity = false;
+        //Freeze();
+        //area.SetActive(false);
     }
 
 
