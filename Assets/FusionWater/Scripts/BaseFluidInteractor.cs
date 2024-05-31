@@ -44,6 +44,7 @@ namespace Fusion.Fluid
             rb = GetComponent<Rigidbody>();
 
             airDrag = rb.drag;
+            Debug.Log("Starting drag:" + airDrag);
             airAngularDrag = rb.angularDrag;
 
             if (customVolume != 0)
@@ -114,6 +115,9 @@ namespace Fusion.Fluid
                 rb.drag = airDrag;
                 rb.angularDrag = airAngularDrag;
             }
+
+            Debug.Log("Drag:" + rb.drag);
+            Debug.Log("Air Drag: " + airDrag);
         }
         #endregion
 

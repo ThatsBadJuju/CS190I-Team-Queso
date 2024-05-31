@@ -61,8 +61,11 @@ namespace HeneGames.DialogueSystem
         public GameObject buoyObject;
         public buoy buoyScript;
         public Swimmer swimmer;
+        public Waypoints runner;
 
+        private int buoyGrabIndex = 2;
         private int buoyTextIndex = 3;
+        private int whistleGrabIndex = 4;
         private int whistleTextIndex = 5;
         private int escapeIndex = 6;
 
@@ -73,12 +76,6 @@ namespace HeneGames.DialogueSystem
             {
                 startDialogueDelayTimer -= Time.deltaTime;
             }
-            //Escape delay timer
-            if(escapeTimer >= 0f && currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
-            {
-                escapeTimer -= Time.deltaTime;
-            }
-
             InputUpdate();
         }
 
@@ -91,10 +88,6 @@ namespace HeneGames.DialogueSystem
                 NextSentenceSoft();
             }
             else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown)
-            {
-                NextSentenceHard();
-            }
-            else if(escapeTimer <= 0f && sentenceIndex == whistleTextIndex)
             {
                 NextSentenceHard();
             }
@@ -154,6 +147,42 @@ namespace HeneGames.DialogueSystem
             }
         }
 
+        public void NextSentenceIfBuoyGrab()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if (currentDialogueManager.GetSentenceIndex() == buoyGrabIndex)
+            {
+                NextSentenceHard();
+            }
+        }
+
+        public void NextSentenceIfWhistle()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if (currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
+            {
+                NextSentenceHard();
+            }
+        }
+
+        public void NextSentenceIfWhistleGrab()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if (currentDialogueManager.GetSentenceIndex() == whistleGrabIndex)
+            {
+                NextSentenceHard();
+            }
+        }
+
         public void StartDialogue(DialogueManager _dialogueManager)
         {
             //Delay timer
@@ -183,7 +212,7 @@ namespace HeneGames.DialogueSystem
 
             if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
             {
-                escapeTimer = 20f;
+                runner.StartRunning();
             }
 
             if (animateText)

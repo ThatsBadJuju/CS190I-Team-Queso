@@ -67,6 +67,7 @@ public class buoy : MonoBehaviour
     {
         //GetComponent<Renderer>().material.color = Color.red;
         //Debug.Log("Picked Up");
+        dialogue.NextSentenceIfBuoyGrab();
         area.SetActive(true);
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();

@@ -21,7 +21,7 @@ public class Waypoints : MonoBehaviour
         {
             Debug.LogError("Animator component not found on the GameObject.");
         }
-        speed = runSpeed; // Start with running speed
+        speed = walkSpeed; // Start with running speed
         UpdateAnimator();
     }
 
@@ -60,7 +60,7 @@ public class Waypoints : MonoBehaviour
     {
         if (animator != null)
         {
-            Debug.Log("Updating Animator with Speed: " + speed);
+            //Debug.Log("Updating Animator with Speed: " + speed);
             animator.SetFloat("Speed", speed);
         }
     }

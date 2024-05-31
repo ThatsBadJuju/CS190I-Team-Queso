@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HeneGames.DialogueSystem;
 
 public class changeColor : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class changeColor : MonoBehaviour
     public Vector3 origPosition;
     public Quaternion origRotation;
     public Waypoints waypoints;
+    public DialogueUI dialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class changeColor : MonoBehaviour
     {
         //GetComponent<Renderer>().material.color = Color.red;
         //Debug.Log("Picked Up");
+        dialogue.NextSentenceIfWhistleGrab();
         area.SetActive(true);
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
@@ -48,6 +51,7 @@ public class changeColor : MonoBehaviour
         if (isInArea)
         {
             // do whistle action
+            dialogue.NextSentenceIfWhistle();
             Debug.Log("success");
             waypoints.StartWalking();
             ResetPosition();

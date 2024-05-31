@@ -12,10 +12,17 @@ public class GetGrabbedBuoy : MonoBehaviour
     public static event Released OnReleased;
     public static event Grabbed OnGrabbed;
 
+    private Rigidbody body;
+    private float origDrag;
+    private float origAngDrag;
+
     // Start is called before the first frame update
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        body = GetComponent<Rigidbody>();
+        origDrag = body.drag;
+        origAngDrag = body.angularDrag;
     }
 
     // Update is called once per frame
@@ -37,6 +44,8 @@ public class GetGrabbedBuoy : MonoBehaviour
                 //Debug.Log("Released");
                 if (OnReleased != null) OnReleased();
                 grabbed = false;
+                body.drag = origDrag;
+                body.angularDrag = origAngDrag;
             }
         }
     }
