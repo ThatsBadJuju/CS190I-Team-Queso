@@ -73,7 +73,6 @@ public class buoy : MonoBehaviour
             GameObject area = areas[i];
             if (isInArea[i] && area.activeSelf)
             {
-                Debug.Log("success");
                 dialogue.NextSentenceIfBuoy();
                 swimmer.setDrown(false);
                 score += 1;

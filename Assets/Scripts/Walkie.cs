@@ -9,6 +9,7 @@ public class Walkie : MonoBehaviour
     public bool isInArea = false;
     public Vector3 origPosition;
     public Quaternion origRotation;
+    
 
     // Start is called before the first frame update
     void Start()
