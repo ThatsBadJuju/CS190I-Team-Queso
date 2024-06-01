@@ -38,6 +38,7 @@ namespace HeneGames.DialogueSystem
 
         public DialogueManager currentDialogueManager;
         private bool typing;
+        public bool completed = false;
         private string currentMessage;
         private float startDialogueDelayTimer;
         private float escapeTimer;
@@ -63,28 +64,23 @@ namespace HeneGames.DialogueSystem
         [Header("Force skip input")]
         public KeyCode skipInput = KeyCode.Escape;
 
-        public GameObject buoyObject;
-        public buoy buoyScript;
         public Swimmer swimmer;
+        public Waypoints runner;
 
+        private int buoyGrabIndex = 2;
         private int buoyTextIndex = 3;
+        private int whistleGrabIndex = 4;
         private int whistleTextIndex = 5;
         private int escapeIndex = 6;
 
         private void Update()
         {
+            if (completed) return;
             //Delay timer
             if(startDialogueDelayTimer > 0f)
             {
                 startDialogueDelayTimer -= Time.deltaTime;
             }
-            //Escape delay timer
-            if(escapeTimer >= 0f)
-            {
-                escapeTimer -= Time.deltaTime;
-            }
-
-            OVRInput.Update();
             InputUpdate();
         }
 
@@ -97,10 +93,6 @@ namespace HeneGames.DialogueSystem
                 NextSentenceSoft();
             }
             else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
-            {
-                NextSentenceHard();
-            }
-            else if(escapeTimer <= 0f || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
             {
                 NextSentenceHard();
             }
@@ -151,10 +143,44 @@ namespace HeneGames.DialogueSystem
             if (currentDialogueManager == null)
                 return;
 
-            swimmer.setDrown(false);
-
             //Hardcoding the index of the buoy sentence, change if necessary
             if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            {
+                NextSentenceHard();
+            }
+        }
+
+        public void NextSentenceIfBuoyGrab()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if (currentDialogueManager.GetSentenceIndex() == buoyGrabIndex)
+            {
+                NextSentenceHard();
+            }
+        }
+
+        public void NextSentenceIfWhistle()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if (currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
+            {
+                NextSentenceHard();
+            }
+        }
+
+        public void NextSentenceIfWhistleGrab()
+        {
+            if (currentDialogueManager == null)
+                return;
+
+            //Hardcoding the index of the buoy sentence, change if necessary
+            if (currentDialogueManager.GetSentenceIndex() == whistleGrabIndex)
             {
                 NextSentenceHard();
             }
@@ -182,12 +208,18 @@ namespace HeneGames.DialogueSystem
             nameText.text = _dialogueCharacter.characterName;
             currentMessage = _message;
 
-            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            if (currentDialogueManager == null)
+                return;
+
+            if (currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
             {
                 swimmer.setDrown(true);
             }
 
-            escapeTimer = 10f;
+            if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
+            {
+                runner.StartRunning();
+            }
 
             if (animateText)
             {

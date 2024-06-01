@@ -5,12 +5,14 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     public GameObject[] waypoints;
+    public RunningMan runningMan;
     private int current = 0;
     private float rotSpeed;
     public float walkSpeed = 2f;
     public float runSpeed = 6f; // Speed for running
     private float speed;
     private float WPradius = 1;
+    private bool running;
 
     private Animator animator;
 
@@ -21,8 +23,9 @@ public class Waypoints : MonoBehaviour
         {
             Debug.LogError("Animator component not found on the GameObject.");
         }
-        speed = runSpeed; // Start with running speed
+        speed = walkSpeed; // Start with walking speed
         UpdateAnimator();
+        running = false;
     }
 
     void Update()
@@ -45,22 +48,34 @@ public class Waypoints : MonoBehaviour
     public void StartWalking()
     {
         Debug.Log("Start Walking");
+        running = false;
         speed = walkSpeed;
         UpdateAnimator();
+
+        if(runningMan != null)
+        {
+            runningMan.Reset();
+        }
     }
 
     public void StartRunning()
     {
         Debug.Log("Start Running");
+        running = true;
+
         speed = runSpeed;
         UpdateAnimator();
+    }
+
+    public bool isRunning() {
+        return running;
     }
 
     void UpdateAnimator()
     {
         if (animator != null)
         {
-            // Debug.Log("Updating Animator with Speed: " + speed);
+            //Debug.Log("Updating Animator with Speed: " + speed);
             animator.SetFloat("Speed", speed);
         }
     }

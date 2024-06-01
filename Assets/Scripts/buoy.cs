@@ -9,11 +9,15 @@ public class buoy : MonoBehaviour
     public int score;
 
     public Vector3 originalLocalScale;
-    public GameObject area;
-    public bool isInArea = false;
+    public GameObject[] areas;
+    public bool[] isInArea; //defaults to false
     public Vector3 origPosition;
     public Quaternion origRotation;
     public DialogueUI dialogue;
+    public MenuBuoy menuBuoy;
+    public Swimmer[] swimmers;
+
+    private float buoyTimer;
 
     void Start()
     {
@@ -22,7 +26,8 @@ public class buoy : MonoBehaviour
         origRotation = transform.localRotation;
 
         score = 0;
-        
+
+        buoyTimer = 0f;
     }
 
     void OnEnable()
@@ -42,14 +47,61 @@ public class buoy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(buoyTimer > 0f)
+        {
+            buoyTimer -= Time.deltaTime;
+        }
+        if (buoyTimer < 0f)
+        {
+            ResetPosition();
+            //GetComponent<Rigidbody>().useGravity = false;
+            Freeze();
+            for(int i = 0; i < areas.Length; i++) 
+            {
+                GameObject area = areas[i];
+                area.SetActive(false);
+                area.GetComponent<BuoyArea>().ChangeColorRed();
+                isInArea[i] = false;
+            }
+            menuBuoy.inMenu = true;
+            buoyTimer = 0f;
+        }
+
+        for (int i = 0; i < swimmers.Length; i++)
+        {
+            Swimmer swimmer = swimmers[i];
+            GameObject area = areas[i];
+            if (isInArea[i] && area.activeSelf)
+            {
+                dialogue.NextSentenceIfBuoy();
+                swimmer.setDrown(false);
+                score += 1;
+                Debug.Log("SCORE: " + score);
+                ResetPosition();
+                //GetComponent<Rigidbody>().useGravity = false;
+                Freeze();
+                area.SetActive(false);
+                menuBuoy.inMenu = true;
+
+                area.GetComponent<BuoyArea>().ChangeColorRed();
+                isInArea[i] = false;
+            }
+        }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "buoy_area")
         {
+            GameObject area = other.gameObject;
             area.GetComponent<BuoyArea>().ChangeColorGreen();
-            isInArea = true;
+            for(int i = 0; i < areas.Length; i++)
+            {
+                if(areas[i].GetInstanceID() == area.GetInstanceID())
+                {
+                    isInArea[i] = true;
+                }
+            }
         }
     }
 
@@ -57,8 +109,15 @@ public class buoy : MonoBehaviour
     {
         if (other.tag == "buoy_area")
         {
+            GameObject area = other.gameObject;
             area.GetComponent<BuoyArea>().ChangeColorRed();
-            isInArea = false;
+            for (int i = 0; i < areas.Length; i++)
+            {
+                if (areas[i].GetInstanceID() == area.GetInstanceID())
+                {
+                    isInArea[i] = false;
+                }
+            }
         }
     }
 
@@ -66,32 +125,45 @@ public class buoy : MonoBehaviour
     void ChangeColor()
     {
         //GetComponent<Renderer>().material.color = Color.red;
-        //Debug.Log("Picked Up");
-        area.SetActive(true);
+        Debug.Log("Picked Up");
+        dialogue.NextSentenceIfBuoyGrab();
+        for (int i = 0; i < swimmers.Length; i++)
+        {
+            Swimmer swimmer = swimmers[i];
+            GameObject area = areas[i];
+            if (swimmer.drown)
+            {
+                area.SetActive(true);
+                Debug.Log("Set Area " + i + " to drowning");
+            }
+        }
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
+        menuBuoy.inMenu = false;
+        buoyTimer = 0f;
     }
 
     void ChangeColorBack()
     {
         //GetComponent<Renderer>().material.color = Color.blue;
-        //Debug.Log("Dropped");
-        if (isInArea)
-        {
-            Debug.Log("success");
-            dialogue.NextSentenceIfBuoy();
-            score += 1;
-            Debug.Log("SCORE: " + score);
-            ResetPosition();
-        }
-        else
-        {
-            // return to starting point
-            ResetPosition();
-        }
-        GetComponent<Rigidbody>().useGravity = false;
-        Freeze();
-        area.SetActive(false);
+        Debug.Log("Dropped");
+        buoyTimer = 3f;
+        //if (isInArea)
+        //{
+        //    Debug.Log("success");
+        //    dialogue.NextSentenceIfBuoy();
+        //    score += 1;
+        //    Debug.Log("SCORE: " + score);
+        //    ResetPosition();
+        //}
+        //else
+        //{
+        //    // return to starting point
+        //    ResetPosition();
+        //}
+        //GetComponent<Rigidbody>().useGravity = false;
+        //Freeze();
+        //area.SetActive(false);
     }
 
 

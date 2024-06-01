@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HeneGames.DialogueSystem;
 
 public class changeColor : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class changeColor : MonoBehaviour
     public bool isInArea = false;
     public Vector3 origPosition;
     public Quaternion origRotation;
-    public Waypoints waypoints;
+    public Waypoints[] waypoints;
+    public DialogueUI dialogue;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class changeColor : MonoBehaviour
     {
         //GetComponent<Renderer>().material.color = Color.red;
         //Debug.Log("Picked Up");
+        dialogue.NextSentenceIfWhistleGrab();
         area.SetActive(true);
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
@@ -43,20 +46,39 @@ public class changeColor : MonoBehaviour
 
     void ChangeColorBack()
     {
-        //GetComponent<Renderer>().material.color = Color.blue;
-        //Debug.Log("Dropped");
-        if (isInArea)
+        bool inArea = false;
+        bool foundRunner = false;
+        if(isInArea && area.activeSelf)
         {
-            // do whistle action
-            Debug.Log("success");
-            waypoints.StartWalking();
-            ResetPosition();
+            Debug.Log("IN");
+            foreach (Waypoints waypoint in waypoints)
+            {
+                if (waypoint.isActiveAndEnabled && waypoint.isRunning())
+                {
+                    // do whistle action
+                    waypoint.StartWalking();
+                    isInArea = false;
+                    inArea = true;
+
+                    GameObject.Find("Whistle").GetComponent<Whistle>().score++;
+                    foundRunner = true;
+                }
+            }
+            if(!foundRunner) {
+
+                //TODO DIALOGUE TO SAY NAW BRUH DONT DO THAT
+                GameObject.Find("Scoreboard").GetComponent<Score>().fails++;
+
+            }
         }
-        else
+        
+        if(inArea)
         {
-            // return to starting point
-            ResetPosition();
+            dialogue.NextSentenceIfWhistle();
+            area.GetComponent<WhistleArea>().ChangeColorRed();
+            
         }
+        ResetPosition();
         GetComponent<Rigidbody>().useGravity = false;
         Freeze();
         area.SetActive(false);
