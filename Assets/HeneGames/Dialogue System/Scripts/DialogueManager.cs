@@ -189,6 +189,8 @@ namespace HeneGames.DialogueSystem
             //Reset sentence index
             currentSentence = 0;
 
+            DialogueUI.instance.completed = false;
+
             //Show first sentence in dialogue UI
             ShowCurrentSentence();
 
@@ -254,6 +256,7 @@ namespace HeneGames.DialogueSystem
 
             //Hide dialogue UI
             DialogueUI.instance.ClearText();
+            DialogueUI.instance.completed = true;
 
             //Stop audiosource so that the speaker's voice does not play in the background
             if(audioSource != null)
