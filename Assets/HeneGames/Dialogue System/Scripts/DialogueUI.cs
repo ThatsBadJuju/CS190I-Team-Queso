@@ -33,6 +33,7 @@ namespace HeneGames.DialogueSystem
 
         public DialogueManager currentDialogueManager;
         private bool typing;
+        public bool completed = false;
         private string currentMessage;
         private float startDialogueDelayTimer;
         private float escapeTimer;
@@ -58,8 +59,6 @@ namespace HeneGames.DialogueSystem
         [Header("Force skip input")]
         public KeyCode skipInput = KeyCode.Escape;
 
-        public GameObject buoyObject;
-        public buoy buoyScript;
         public Swimmer swimmer;
         public Waypoints runner;
 
@@ -71,6 +70,7 @@ namespace HeneGames.DialogueSystem
 
         private void Update()
         {
+            if (completed) return;
             //Delay timer
             if(startDialogueDelayTimer > 0f)
             {
@@ -138,8 +138,6 @@ namespace HeneGames.DialogueSystem
             if (currentDialogueManager == null)
                 return;
 
-            swimmer.setDrown(false);
-
             //Hardcoding the index of the buoy sentence, change if necessary
             if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
             {
@@ -205,7 +203,10 @@ namespace HeneGames.DialogueSystem
             nameText.text = _dialogueCharacter.characterName;
             currentMessage = _message;
 
-            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            if (currentDialogueManager == null)
+                return;
+
+            if (currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
             {
                 swimmer.setDrown(true);
             }
