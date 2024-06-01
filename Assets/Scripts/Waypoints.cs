@@ -12,6 +12,7 @@ public class Waypoints : MonoBehaviour
     public float runSpeed = 6f; // Speed for running
     private float speed;
     private float WPradius = 1;
+    private bool running;
 
     private Animator animator;
 
@@ -24,6 +25,7 @@ public class Waypoints : MonoBehaviour
         }
         speed = walkSpeed; // Start with walking speed
         UpdateAnimator();
+        running = false;
     }
 
     void Update()
@@ -46,6 +48,7 @@ public class Waypoints : MonoBehaviour
     public void StartWalking()
     {
         Debug.Log("Start Walking");
+        running = false;
         speed = walkSpeed;
         UpdateAnimator();
 
@@ -58,8 +61,14 @@ public class Waypoints : MonoBehaviour
     public void StartRunning()
     {
         Debug.Log("Start Running");
+        running = true;
+
         speed = runSpeed;
         UpdateAnimator();
+    }
+
+    public bool isRunning() {
+        return running;
     }
 
     void UpdateAnimator()

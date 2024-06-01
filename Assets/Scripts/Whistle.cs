@@ -6,6 +6,10 @@ public class Whistle : MonoBehaviour
 {
     public delegate void WhistleGrabbedEventHandler();
     public static event WhistleGrabbedEventHandler OnWhistleGrabbed;
+    public int score;
+    void Start() {
+        score = 0;
+    }
 
     void OnEnable()
     {

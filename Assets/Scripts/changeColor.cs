@@ -46,20 +46,29 @@ public class changeColor : MonoBehaviour
 
     void ChangeColorBack()
     {
-        //GetComponent<Renderer>().material.color = Color.blue;
-        //Debug.Log("Dropped");
         bool inArea = false;
+        bool foundRunner = false;
         if(isInArea && area.activeSelf)
         {
+            Debug.Log("IN");
             foreach (Waypoints waypoint in waypoints)
             {
-                if (waypoint.isActiveAndEnabled)
+                if (waypoint.isActiveAndEnabled && waypoint.isRunning())
                 {
                     // do whistle action
                     waypoint.StartWalking();
                     isInArea = false;
                     inArea = true;
+
+                    GameObject.Find("Whistle").GetComponent<Whistle>().score++;
+                    foundRunner = true;
                 }
+            }
+            if(!foundRunner) {
+
+                //TODO DIALOGUE TO SAY NAW BRUH DONT DO THAT
+                GameObject.Find("Scoreboard").GetComponent<Score>().fails++;
+
             }
         }
         
@@ -67,6 +76,7 @@ public class changeColor : MonoBehaviour
         {
             dialogue.NextSentenceIfWhistle();
             area.GetComponent<WhistleArea>().ChangeColorRed();
+            
         }
         ResetPosition();
         GetComponent<Rigidbody>().useGravity = false;
