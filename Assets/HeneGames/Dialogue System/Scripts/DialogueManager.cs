@@ -44,7 +44,7 @@ namespace HeneGames.DialogueSystem
             }
 
             if(Time.time - timeSinceLastInput > 5.0f) {
-                score.scoreText.text += "Look at the Trainer NPC and hit A";
+                score.scoreText.text += "<i>Look at the Trainer NPC and hit A</i>\n";
             }
             if(Input.GetKeyDown(DialogueUI.instance.actionInput)) {
                 timeSinceLastInput = Time.time;
