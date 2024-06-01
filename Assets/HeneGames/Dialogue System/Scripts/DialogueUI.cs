@@ -37,6 +37,8 @@ namespace HeneGames.DialogueSystem
         private float startDialogueDelayTimer;
         private float escapeTimer;
 
+        public CubeGrab CubeGrab;
+
         [Header("References")]
         [SerializeField] private Image portrait;
         [SerializeField] private TextMeshProUGUI nameText;
@@ -84,7 +86,7 @@ namespace HeneGames.DialogueSystem
 
         public virtual void InputUpdate()
         {
-            if (CubeGrab.isGrabbed && currentDialogueManager != null)
+            if (CubeGrab.isGrabbed && currentDialogueManager != null) {
                 NextSentenceSoft();
             }
 
