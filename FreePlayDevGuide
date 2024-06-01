@@ -1,0 +1,18 @@
+Tutorial and Free Play Instructions:
+1) Play the tutorial out
+2) Turn around and click the free play button
+3) There will be 2 swimmers and 2 runners that you can interact with using buoys and whistle
+4) You can also go back to the tutorial at any time
+
+Adding runner:
+1) Copy one of the runners in free play mode and rename it, also reposition it
+2) Copy one of the waypoints and rename it, move waypoints around to change their pathing
+3) In the running man object, change the waypoints in the Waypoints script to use your new set of waypoints, and change the waypoints in the Running Man script to use your new set of waypoints
+4) In the whistle object (part of the menu in XR Rig), add the new runner waypoint to the change color script
+
+Adding swimmer:
+1) Copy one of the swimmers in free play mode and rename it, also reposition it, and rename the buoy area in the swimmer object to something else (like Buoy Area X)
+2) In your new swimmer object, change the Swimmer scripts to use your new swimming man
+3) In the Menu_Buoy object, add your buoy area to the Areas tab of the Buoy script, add a new swimmer to the Swimmers tab of the buoy script, and increase the Is In Area number by 1
+
+LMK if I missed anything
