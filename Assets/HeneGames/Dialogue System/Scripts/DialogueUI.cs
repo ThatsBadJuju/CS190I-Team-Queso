@@ -138,8 +138,6 @@ namespace HeneGames.DialogueSystem
             if (currentDialogueManager == null)
                 return;
 
-            swimmer.setDrown(false);
-
             //Hardcoding the index of the buoy sentence, change if necessary
             if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
             {

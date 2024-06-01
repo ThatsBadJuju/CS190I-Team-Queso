@@ -8,6 +8,7 @@ public class Swimmer : MonoBehaviour
     public ComplexFluidInteractor fluidInteractor;
     private Animator animator;
     public bool drown;
+    public SwimmingMan swimmingMan;
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class Swimmer : MonoBehaviour
         else
         {
             fluidInteractor.floatStrength = 2.0f;
+            if (swimmingMan != null) swimmingMan.Reset();
         }
     }
 

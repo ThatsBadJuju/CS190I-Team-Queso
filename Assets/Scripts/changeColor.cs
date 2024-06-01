@@ -49,17 +49,20 @@ public class changeColor : MonoBehaviour
         //GetComponent<Renderer>().material.color = Color.blue;
         //Debug.Log("Dropped");
         bool inArea = false;
-        foreach (Waypoints waypoint in waypoints)
+        if(isInArea && area.activeSelf)
         {
-            if (isInArea && area.activeSelf && waypoint.isActiveAndEnabled)
+            foreach (Waypoints waypoint in waypoints)
             {
-                // do whistle action
-                waypoint.StartWalking();
-                isInArea = false;
-                inArea = true;
+                if (waypoint.isActiveAndEnabled)
+                {
+                    // do whistle action
+                    waypoint.StartWalking();
+                    isInArea = false;
+                    inArea = true;
+                }
             }
         }
-
+        
         if(inArea)
         {
             dialogue.NextSentenceIfWhistle();

@@ -9,13 +9,13 @@ public class buoy : MonoBehaviour
     public int score;
 
     public Vector3 originalLocalScale;
-    public GameObject area;
-    public bool isInArea = false;
+    public GameObject[] areas;
+    public bool[] isInArea; //defaults to false
     public Vector3 origPosition;
     public Quaternion origRotation;
     public DialogueUI dialogue;
     public MenuBuoy menuBuoy;
-    public Swimmer swimmer;
+    public Swimmer[] swimmers;
 
     private float buoyTimer;
 
@@ -51,32 +51,42 @@ public class buoy : MonoBehaviour
         {
             buoyTimer -= Time.deltaTime;
         }
-
-        if (isInArea && area.activeSelf)
-        {
-            Debug.Log("success");
-            dialogue.NextSentenceIfBuoy();
-            score += 1;
-            Debug.Log("SCORE: " + score);
-            ResetPosition();
-            //GetComponent<Rigidbody>().useGravity = false;
-            Freeze();
-            area.SetActive(false);
-            menuBuoy.inMenu = true;
-
-            area.GetComponent<BuoyArea>().ChangeColorRed();
-            isInArea = false;
-        }
-        else if(buoyTimer < 0f)
+        if (buoyTimer < 0f)
         {
             ResetPosition();
             //GetComponent<Rigidbody>().useGravity = false;
             Freeze();
-            area.SetActive(false);
+            for(int i = 0; i < areas.Length; i++) 
+            {
+                GameObject area = areas[i];
+                area.SetActive(false);
+                area.GetComponent<BuoyArea>().ChangeColorRed();
+                isInArea[i] = false;
+            }
             menuBuoy.inMenu = true;
-            area.GetComponent<BuoyArea>().ChangeColorRed();
-            isInArea = false;
             buoyTimer = 0f;
+        }
+
+        for (int i = 0; i < swimmers.Length; i++)
+        {
+            Swimmer swimmer = swimmers[i];
+            GameObject area = areas[i];
+            if (isInArea[i] && area.activeSelf)
+            {
+                Debug.Log("success");
+                dialogue.NextSentenceIfBuoy();
+                swimmer.setDrown(false);
+                score += 1;
+                Debug.Log("SCORE: " + score);
+                ResetPosition();
+                //GetComponent<Rigidbody>().useGravity = false;
+                Freeze();
+                area.SetActive(false);
+                menuBuoy.inMenu = true;
+
+                area.GetComponent<BuoyArea>().ChangeColorRed();
+                isInArea[i] = false;
+            }
         }
     }
 
@@ -84,8 +94,15 @@ public class buoy : MonoBehaviour
     {
         if (other.tag == "buoy_area")
         {
+            GameObject area = other.gameObject;
             area.GetComponent<BuoyArea>().ChangeColorGreen();
-            isInArea = true;
+            for(int i = 0; i < areas.Length; i++)
+            {
+                if(areas[i].GetInstanceID() == area.GetInstanceID())
+                {
+                    isInArea[i] = true;
+                }
+            }
         }
     }
 
@@ -93,8 +110,15 @@ public class buoy : MonoBehaviour
     {
         if (other.tag == "buoy_area")
         {
+            GameObject area = other.gameObject;
             area.GetComponent<BuoyArea>().ChangeColorRed();
-            isInArea = false;
+            for (int i = 0; i < areas.Length; i++)
+            {
+                if (areas[i].GetInstanceID() == area.GetInstanceID())
+                {
+                    isInArea[i] = false;
+                }
+            }
         }
     }
 
@@ -104,9 +128,15 @@ public class buoy : MonoBehaviour
         //GetComponent<Renderer>().material.color = Color.red;
         Debug.Log("Picked Up");
         dialogue.NextSentenceIfBuoyGrab();
-        if (swimmer.drown)
+        for (int i = 0; i < swimmers.Length; i++)
         {
-            area.SetActive(true);
+            Swimmer swimmer = swimmers[i];
+            GameObject area = areas[i];
+            if (swimmer.drown)
+            {
+                area.SetActive(true);
+                Debug.Log("Set Area " + i + " to drowning");
+            }
         }
         GetComponent<Rigidbody>().useGravity = true;
         UnFreeze();
