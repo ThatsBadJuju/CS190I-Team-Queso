@@ -64,7 +64,6 @@ public class changeColor : MonoBehaviour
                 {
                     // do whistle action
                     waypoint.StartWalking();
-                    isInArea = false;
                     inArea = true;
 
                     GameObject.Find("Whistle").GetComponent<Whistle>().score++;
@@ -89,6 +88,8 @@ public class changeColor : MonoBehaviour
         GetComponent<Rigidbody>().useGravity = false;
         Freeze();
         area.SetActive(false);
+        area.GetComponent<WhistleArea>().ChangeColorRed();
+        isInArea = false;
     }
 
     private void OnTriggerEnter(Collider other)
