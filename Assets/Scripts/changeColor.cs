@@ -10,7 +10,7 @@ public class changeColor : MonoBehaviour
     public bool isInArea = false;
     public Vector3 origPosition;
     public Quaternion origRotation;
-    public Waypoints waypoints;
+    public Waypoints[] waypoints;
     public DialogueUI dialogue;
 
     // Start is called before the first frame update
@@ -48,19 +48,24 @@ public class changeColor : MonoBehaviour
     {
         //GetComponent<Renderer>().material.color = Color.blue;
         //Debug.Log("Dropped");
-        if (isInArea)
+        bool inArea = false;
+        foreach (Waypoints waypoint in waypoints)
         {
-            // do whistle action
+            if (isInArea && area.activeSelf && waypoint.isActiveAndEnabled)
+            {
+                // do whistle action
+                waypoint.StartWalking();
+                isInArea = false;
+                inArea = true;
+            }
+        }
+
+        if(inArea)
+        {
             dialogue.NextSentenceIfWhistle();
-            Debug.Log("success");
-            waypoints.StartWalking();
-            ResetPosition();
+            area.GetComponent<WhistleArea>().ChangeColorRed();
         }
-        else
-        {
-            // return to starting point
-            ResetPosition();
-        }
+        ResetPosition();
         GetComponent<Rigidbody>().useGravity = false;
         Freeze();
         area.SetActive(false);

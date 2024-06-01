@@ -1489,6 +1489,7 @@ MonoBehaviour:
   - {fileID: 1245574884}
   - {fileID: 33208024}
   - {fileID: 1566871174}
+  runningMan: {fileID: 197380885}
   walkSpeed: 2
   runSpeed: 6
 --- !u!65 &197380883
@@ -1512,6 +1513,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &197380885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197380880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21152ab5ce5037f4ea81264e2e9bbce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: {fileID: 197380882}
 --- !u!1 &203730781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5470,6 +5484,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 197380882}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81bb9eea30387e442899949a80011e55,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 197380885}
   m_SourcePrefab: {fileID: 100100000, guid: 81bb9eea30387e442899949a80011e55, type: 3}
 --- !u!1 &510850251
 GameObject:
@@ -9105,6 +9123,7 @@ MonoBehaviour:
   - {fileID: 1234371325}
   - {fileID: 1791607146}
   - {fileID: 1286664913}
+  runningMan: {fileID: 0}
   walkSpeed: 2
   runSpeed: 6
 --- !u!65 &883340779
@@ -11753,6 +11772,7 @@ MonoBehaviour:
   - {fileID: 1234371325}
   - {fileID: 1791607146}
   - {fileID: 1286664913}
+  runningMan: {fileID: 0}
   walkSpeed: 2
   runSpeed: 6
 --- !u!4 &1153676390 stripped
@@ -18904,7 +18924,9 @@ MonoBehaviour:
   isInArea: 0
   origPosition: {x: 0, y: 0, z: 0}
   origRotation: {x: 0, y: 0, z: 0, w: 0}
-  waypoints: {fileID: 1153676388}
+  waypoints:
+  - {fileID: 1153676388}
+  - {fileID: 197380882}
   dialogue: {fileID: 683619907}
 --- !u!4 &2077493830 stripped
 Transform:

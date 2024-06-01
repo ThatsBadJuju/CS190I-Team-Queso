@@ -5,6 +5,7 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     public GameObject[] waypoints;
+    public RunningMan runningMan;
     private int current = 0;
     private float rotSpeed;
     public float walkSpeed = 2f;
@@ -47,6 +48,11 @@ public class Waypoints : MonoBehaviour
         Debug.Log("Start Walking");
         speed = walkSpeed;
         UpdateAnimator();
+
+        if(runningMan != null)
+        {
+            runningMan.Reset();
+        }
     }
 
     public void StartRunning()
