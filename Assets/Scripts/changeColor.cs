@@ -12,6 +12,10 @@ public class changeColor : MonoBehaviour
     public Quaternion origRotation;
     public Waypoints[] waypoints;
     public DialogueUI dialogue;
+    private bool whistleIncorrectlyBlown;
+    float startTime;
+    float currTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,10 @@ public class changeColor : MonoBehaviour
         originalLocalScale = GetComponent<Transform>().localScale;
         origPosition = transform.localPosition;
         origRotation = transform.localRotation;
+
+        startTime = Time.time;
+        currTime = Time.time;
+        whistleIncorrectlyBlown = false;
     }
 
     // Update is called once per frame
@@ -50,7 +58,6 @@ public class changeColor : MonoBehaviour
         bool foundRunner = false;
         if(isInArea && area.activeSelf)
         {
-            Debug.Log("IN");
             foreach (Waypoints waypoint in waypoints)
             {
                 if (waypoint.isActiveAndEnabled && waypoint.isRunning())
@@ -65,8 +72,8 @@ public class changeColor : MonoBehaviour
                 }
             }
             if(!foundRunner) {
+                whistleIncorrectlyBlown = true;
 
-                //TODO DIALOGUE TO SAY NAW BRUH DONT DO THAT
                 GameObject.Find("Scoreboard").GetComponent<Score>().fails++;
 
             }
@@ -120,4 +127,22 @@ public class changeColor : MonoBehaviour
     {
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
+    
+    void Update() {
+        
+        if (whistleIncorrectlyBlown) {
+            Debug.Log("UPDATING HELLO");
+            if(currTime - startTime < 5) {
+                GameObject.Find("Scoreboard").GetComponent<Score>().scoreText.text += "<b>Don't whistle if there are no runners!</b>\n";
+                currTime = Time.time;
+            } else {
+                whistleIncorrectlyBlown = false;
+            }
+
+        } else {
+            startTime = Time.time;
+            currTime = Time.time;
+        }
+    }
+
 }
