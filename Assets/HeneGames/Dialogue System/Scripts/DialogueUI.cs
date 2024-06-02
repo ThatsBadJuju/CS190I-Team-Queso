@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static OVRInput;
 
 namespace HeneGames.DialogueSystem
 {
@@ -11,6 +12,8 @@ namespace HeneGames.DialogueSystem
         #region Singleton
 
         public static DialogueUI instance { get; private set; }
+        abutton abut;
+        bbutton bbut;
 
         private void Awake()
         {
@@ -27,6 +30,8 @@ namespace HeneGames.DialogueSystem
             //Hide dialogue and interaction UI at awake
             dialogueWindow.SetActive(false);
             interactionUI.SetActive(false);
+            abut = GameObject.Find("Abutton").GetComponent<abutton>();
+            bbut = GameObject.Find("bbutton").GetComponent<bbutton>();
         }
 
         #endregion
@@ -91,7 +96,7 @@ namespace HeneGames.DialogueSystem
         {
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) 
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) 
             && sentenceIndex != buoyGrabIndex && sentenceIndex != buoyTextIndex && sentenceIndex != whistleGrabIndex
             && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex && sentenceIndex != wrongIndex1 && 
             sentenceIndex != drownAgainIndex && sentenceIndex != wrongIndex2 && sentenceIndex != lastIndex)
@@ -99,7 +104,7 @@ namespace HeneGames.DialogueSystem
                 Debug.Log("IN");
                 NextSentenceSoft();
             }
-            else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown) && sentenceIndex == escapeIndex)
+            else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed()) && sentenceIndex == escapeIndex)
             {
                 NextSentenceHard();
             } else if(wrong) {
