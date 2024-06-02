@@ -42,7 +42,7 @@ namespace HeneGames.DialogueSystem
         }
         private void Update()
         {
-            OVRInput.Update();
+            //OVRInput.Update();
             //Timer
             if(coolDownTimer > 0f)
             {
@@ -52,7 +52,11 @@ namespace HeneGames.DialogueSystem
             if(Time.time - timeSinceLastInput > 5.0f) {
                 score.scoreText.text += "<i>Look at the Trainer NPC and hit A</i>\n";
             }
-            if(OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) {
+            //if(OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) {
+            //    timeSinceLastInput = Time.time;
+            //}
+            if (abut.IsGrabbed())
+            {
                 timeSinceLastInput = Time.time;
             }
             if (Input.GetKeyDown(DialogueUI.instance.actionInput) && dialogueTrigger != null && !dialogueIsOn)

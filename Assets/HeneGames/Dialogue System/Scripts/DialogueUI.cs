@@ -86,13 +86,24 @@ namespace HeneGames.DialogueSystem
 
         public virtual void InputUpdate()
         {
+            ////Next dialogue input
+            //int sentenceIndex = currentDialogueManager.GetSentenceIndex();
+            //if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            //{
+            //    NextSentenceSoft();
+            //}
+            //else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
+            //{
+            //    NextSentenceHard();
+            //}
+
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
             {
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
+            else if (Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || bbut.IsGrabbed())
             {
                 NextSentenceHard();
             }
