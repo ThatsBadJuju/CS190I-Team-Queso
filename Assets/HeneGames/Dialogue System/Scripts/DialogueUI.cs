@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,6 +42,7 @@ namespace HeneGames.DialogueSystem
         private string currentMessage;
         private float startDialogueDelayTimer;
         private float escapeTimer;
+        bool wrong = false;
 
         [Header("References")]
         [SerializeField] private Image portrait;
@@ -49,6 +50,7 @@ namespace HeneGames.DialogueSystem
         [SerializeField] private TextMeshProUGUI messageText;
         [SerializeField] private GameObject dialogueWindow;
         [SerializeField] private GameObject interactionUI;
+        [SerializeField] private GameObject incorrectUI;
 
         [Header("Settings")]
         [SerializeField] private bool animateText = true;
@@ -72,6 +74,12 @@ namespace HeneGames.DialogueSystem
         private int whistleGrabIndex = 4;
         private int whistleTextIndex = 5;
         private int escapeIndex = 6;
+
+        private int urWrongIndex = 8;
+        private int wrongIndex1 = 9;
+        private int drownAgainIndex = 11;
+        private int wrongIndex2 = 12;
+        private int lastIndex =14;
 
         private void Update()
         {
@@ -99,13 +107,22 @@ namespace HeneGames.DialogueSystem
 
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) 
+            && sentenceIndex != buoyGrabIndex && sentenceIndex != buoyTextIndex && sentenceIndex != whistleGrabIndex
+            && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex && sentenceIndex != wrongIndex1 && 
+            sentenceIndex != drownAgainIndex && sentenceIndex != wrongIndex2 && sentenceIndex != lastIndex)
             {
+                Debug.Log("IN");
                 NextSentenceSoft();
             }
-            else if (Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || bbut.IsGrabbed())
+            else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown) && sentenceIndex == escapeIndex)
             {
                 NextSentenceHard();
+            } else if(wrong) {
+                NextSentenceHard();
+                wrong = false;
+                incorrectUI.SetActive(false);
+
             }
         }
 
@@ -155,7 +172,8 @@ namespace HeneGames.DialogueSystem
                 return;
 
             //Hardcoding the index of the buoy sentence, change if necessary
-            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex 
+            || currentDialogueManager.GetSentenceIndex() == drownAgainIndex)
             {
                 NextSentenceHard();
             }
@@ -222,7 +240,8 @@ namespace HeneGames.DialogueSystem
             if (currentDialogueManager == null)
                 return;
 
-            if (currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            if (currentDialogueManager.GetSentenceIndex() == buoyTextIndex
+            || currentDialogueManager.GetSentenceIndex() == drownAgainIndex)
             {
                 swimmer.setDrown(true);
             }
@@ -230,6 +249,12 @@ namespace HeneGames.DialogueSystem
             if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
             {
                 runner.StartRunning();
+            }
+
+            if(currentDialogueManager.GetSentenceIndex() == urWrongIndex ||
+            currentDialogueManager.GetSentenceIndex() == wrongIndex2)
+            {
+                incorrectUI.SetActive(true);
             }
 
             if (animateText)
@@ -295,6 +320,9 @@ namespace HeneGames.DialogueSystem
 
                 yield return new WaitForSeconds(0.1f * _speed);
             }
+        }
+        public void setWrong() {
+            wrong = true;
         }
     }
 }
