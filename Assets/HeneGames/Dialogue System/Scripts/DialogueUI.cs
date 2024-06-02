@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static OVRInput;
 
 namespace HeneGames.DialogueSystem
 {
@@ -11,6 +12,8 @@ namespace HeneGames.DialogueSystem
         #region Singleton
 
         public static DialogueUI instance { get; private set; }
+        abutton abut;
+        bbutton bbut;
 
         private void Awake()
         {
@@ -27,6 +30,8 @@ namespace HeneGames.DialogueSystem
             //Hide dialogue and interaction UI at awake
             dialogueWindow.SetActive(false);
             interactionUI.SetActive(false);
+            // abut = GameObject.Find("Abutton").GetComponent<abutton>();
+            // bbut = GameObject.Find("bbutton").GetComponent<bbutton>();
         }
 
         #endregion
@@ -37,6 +42,7 @@ namespace HeneGames.DialogueSystem
         private string currentMessage;
         private float startDialogueDelayTimer;
         private float escapeTimer;
+        bool wrong = false;
 
         [Header("References")]
         [SerializeField] private Image portrait;
@@ -44,6 +50,7 @@ namespace HeneGames.DialogueSystem
         [SerializeField] private TextMeshProUGUI messageText;
         [SerializeField] private GameObject dialogueWindow;
         [SerializeField] private GameObject interactionUI;
+        [SerializeField] private GameObject incorrectUI;
 
         [Header("Settings")]
         [SerializeField] private bool animateText = true;
@@ -68,6 +75,12 @@ namespace HeneGames.DialogueSystem
         private int whistleTextIndex = 5;
         private int escapeIndex = 6;
 
+        private int urWrongIndex = 8;
+        private int wrongIndex1 = 9;
+        private int drownAgainIndex = 11;
+        private int wrongIndex2 = 12;
+        private int lastIndex =14;
+
         private void Update()
         {
             if (completed) return;
@@ -81,15 +94,35 @@ namespace HeneGames.DialogueSystem
 
         public virtual void InputUpdate()
         {
+            ////Next dialogue input
+            //int sentenceIndex = currentDialogueManager.GetSentenceIndex();
+            //if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            //{
+            //    NextSentenceSoft();
+            //}
+            //else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
+            //{
+            //    NextSentenceHard();
+            //}
+
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) 
+            && sentenceIndex != buoyGrabIndex && sentenceIndex != buoyTextIndex && sentenceIndex != whistleGrabIndex
+            && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex && sentenceIndex != wrongIndex1 && 
+            sentenceIndex != drownAgainIndex && sentenceIndex != wrongIndex2 && sentenceIndex != lastIndex)
             {
+                Debug.Log("IN");
                 NextSentenceSoft();
             }
-            else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown)
+            else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown) && sentenceIndex == escapeIndex)
             {
                 NextSentenceHard();
+            } else if(wrong) {
+                NextSentenceHard();
+                wrong = false;
+                incorrectUI.SetActive(false);
+
             }
         }
 
@@ -139,7 +172,8 @@ namespace HeneGames.DialogueSystem
                 return;
 
             //Hardcoding the index of the buoy sentence, change if necessary
-            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            if(currentDialogueManager.GetSentenceIndex() == buoyTextIndex 
+            || currentDialogueManager.GetSentenceIndex() == drownAgainIndex)
             {
                 NextSentenceHard();
             }
@@ -206,7 +240,8 @@ namespace HeneGames.DialogueSystem
             if (currentDialogueManager == null)
                 return;
 
-            if (currentDialogueManager.GetSentenceIndex() == buoyTextIndex)
+            if (currentDialogueManager.GetSentenceIndex() == buoyTextIndex
+            || currentDialogueManager.GetSentenceIndex() == drownAgainIndex)
             {
                 swimmer.setDrown(true);
             }
@@ -214,6 +249,12 @@ namespace HeneGames.DialogueSystem
             if(currentDialogueManager.GetSentenceIndex() == whistleTextIndex)
             {
                 runner.StartRunning();
+            }
+
+            if(currentDialogueManager.GetSentenceIndex() == urWrongIndex ||
+            currentDialogueManager.GetSentenceIndex() == wrongIndex2)
+            {
+                incorrectUI.SetActive(true);
             }
 
             if (animateText)
@@ -279,6 +320,9 @@ namespace HeneGames.DialogueSystem
 
                 yield return new WaitForSeconds(0.1f * _speed);
             }
+        }
+        public void setWrong() {
+            wrong = true;
         }
     }
 }
