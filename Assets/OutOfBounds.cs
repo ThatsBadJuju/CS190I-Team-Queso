@@ -16,7 +16,7 @@ public class TriggerZone : MonoBehaviour
             DisplayMessage(enterMessage);
         }
     }
-
+    
     private void DisplayMessage(string message)
     {
         if (messageText != null)
