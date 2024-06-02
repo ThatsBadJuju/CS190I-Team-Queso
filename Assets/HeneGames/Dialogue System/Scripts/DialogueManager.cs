@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static OVRInput;
 
 namespace HeneGames.DialogueSystem
 {
@@ -31,12 +32,17 @@ namespace HeneGames.DialogueSystem
         [Header("Dialogue")]
         [SerializeField] private TriggerState triggerState;
         [SerializeField] private List<NPC_Sentence> sentences = new List<NPC_Sentence>();
+        abutton abut;
+
         private void Start() {
             score = GameObject.Find("Scoreboard").GetComponent<Score>();
             timeSinceLastInput = Time.time;
+            // abut = GameObject.Find("Abutton").GetComponent<abutton>();
+
         }
         private void Update()
         {
+            //OVRInput.Update();
             //Timer
             if(coolDownTimer > 0f)
             {
@@ -44,12 +50,15 @@ namespace HeneGames.DialogueSystem
             }
 
             if(Time.time - timeSinceLastInput > 5.0f) {
-                score.scoreText.text += "Look at the Trainer NPC and hit A";
+                score.scoreText.text += "<i>Look at the Trainer NPC for instructions</i>\n";
             }
-            if(Input.GetKeyDown(DialogueUI.instance.actionInput)) {
+            //if(OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) {
+            //    timeSinceLastInput = Time.time;
+            //}
+            if (Input.GetKeyDown(DialogueUI.instance.actionInput) || DialogueUI.instance.vrInput.primaryButtonDown)
+            {
                 timeSinceLastInput = Time.time;
             }
-            //Start dialogue by input
             if (Input.GetKeyDown(DialogueUI.instance.actionInput) && dialogueTrigger != null && !dialogueIsOn)
             {
                 //Trigger event inside DialogueTrigger component
@@ -317,6 +326,7 @@ namespace HeneGames.DialogueSystem
         {
             return currentSentence;
         }
+        
     }
 
     [System.Serializable]
