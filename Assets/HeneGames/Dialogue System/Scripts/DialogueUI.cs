@@ -94,9 +94,20 @@ namespace HeneGames.DialogueSystem
 
         public virtual void InputUpdate()
         {
+            ////Next dialogue input
+            //int sentenceIndex = currentDialogueManager.GetSentenceIndex();
+            //if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex)
+            //{
+            //    NextSentenceSoft();
+            //}
+            //else if(Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed())
+            //{
+            //    NextSentenceHard();
+            //}
+
             //Next dialogue input
             int sentenceIndex = currentDialogueManager.GetSentenceIndex();
-            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown || OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) 
+            if ((Input.GetKeyDown(actionInput) || vrInput.primaryButtonDown) 
             && sentenceIndex != buoyGrabIndex && sentenceIndex != buoyTextIndex && sentenceIndex != whistleGrabIndex
             && sentenceIndex != whistleTextIndex && sentenceIndex != escapeIndex && sentenceIndex != wrongIndex1 && 
             sentenceIndex != drownAgainIndex && sentenceIndex != wrongIndex2 && sentenceIndex != lastIndex)
@@ -104,7 +115,7 @@ namespace HeneGames.DialogueSystem
                 Debug.Log("IN");
                 NextSentenceSoft();
             }
-            else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown || OVRInput.GetDown(OVRInput.Button.Two) || bbut.IsGrabbed()) && sentenceIndex == escapeIndex)
+            else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown) && sentenceIndex == escapeIndex)
             {
                 NextSentenceHard();
             } else if(wrong) {
