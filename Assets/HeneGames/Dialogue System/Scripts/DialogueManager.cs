@@ -317,6 +317,7 @@ namespace HeneGames.DialogueSystem
         {
             return currentSentence;
         }
+        
     }
 
     [System.Serializable]
