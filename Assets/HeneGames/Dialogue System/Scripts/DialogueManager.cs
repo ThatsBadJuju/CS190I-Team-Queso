@@ -37,7 +37,7 @@ namespace HeneGames.DialogueSystem
         private void Start() {
             score = GameObject.Find("Scoreboard").GetComponent<Score>();
             timeSinceLastInput = Time.time;
-            abut = GameObject.Find("Abutton").GetComponent<abutton>();
+            // abut = GameObject.Find("Abutton").GetComponent<abutton>();
 
         }
         private void Update()
@@ -55,7 +55,7 @@ namespace HeneGames.DialogueSystem
             //if(OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) {
             //    timeSinceLastInput = Time.time;
             //}
-            if (abut.IsGrabbed())
+            if (Input.GetKeyDown(DialogueUI.instance.actionInput) || DialogueUI.instance.vrInput.primaryButtonDown)
             {
                 timeSinceLastInput = Time.time;
             }

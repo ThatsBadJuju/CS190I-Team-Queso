@@ -30,8 +30,8 @@ namespace HeneGames.DialogueSystem
             //Hide dialogue and interaction UI at awake
             dialogueWindow.SetActive(false);
             interactionUI.SetActive(false);
-            abut = GameObject.Find("Abutton").GetComponent<abutton>();
-            bbut = GameObject.Find("bbutton").GetComponent<bbutton>();
+            // abut = GameObject.Find("Abutton").GetComponent<abutton>();
+            // bbut = GameObject.Find("bbutton").GetComponent<bbutton>();
         }
 
         #endregion
