@@ -79,6 +79,7 @@ namespace HeneGames.DialogueSystem
         private int wrongIndex1 = 9;
         private int drownAgainIndex = 11;
         private int wrongIndex2 = 12;
+        private int savedPerson = 13;
         private int lastIndex =14;
 
         private void Update()
@@ -118,11 +119,15 @@ namespace HeneGames.DialogueSystem
             else if((Input.GetKeyDown(skipInput) || vrInput.secondaryButtonDown) && sentenceIndex == escapeIndex)
             {
                 NextSentenceHard();
-            } else if(wrong) {
-                NextSentenceHard();
-                wrong = false;
-                incorrectUI.SetActive(false);
-
+            } 
+            else if(sentenceIndex == urWrongIndex || sentenceIndex == wrongIndex1 || sentenceIndex == wrongIndex2) {
+                incorrectUI.SetActive(true);
+                if(wrong)
+                {
+                    NextSentenceHard();
+                    wrong = false;
+                    incorrectUI.SetActive(false);
+                }
             }
         }
 
