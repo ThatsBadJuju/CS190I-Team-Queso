@@ -28750,12 +28750,12 @@ PrefabInstance:
         type: 3}
       propertyPath: runner
       value: 
-      objectReference: {fileID: 1153676388}
+      objectReference: {fileID: 445026051}
     - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
         type: 3}
       propertyPath: swimmer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1265854870}
     - target: {fileID: 6449296285829880520, guid: 66a0aba2ba55058439c92574558222ac,
         type: 3}
       propertyPath: vrInput
@@ -29215,7 +29215,7 @@ Transform:
   m_GameObject: {fileID: 2069821373}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.762, y: 0.9420004, z: 2.788}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29758,6 +29758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  audioSource: {fileID: 0}
 --- !u!114 &2077493829
 MonoBehaviour:
   m_ObjectHideFlags: 0
