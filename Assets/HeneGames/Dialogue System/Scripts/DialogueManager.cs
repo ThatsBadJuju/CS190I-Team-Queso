@@ -50,7 +50,7 @@ namespace HeneGames.DialogueSystem
             }
 
             if(Time.time - timeSinceLastInput > 5.0f) {
-                score.scoreText.text += "<i>Look at the Trainer NPC for instructions</i>\n";
+                //score.scoreText.text += "<i>Look at the Trainer NPC for instructions</i>\n";
             }
             //if(OVRInput.GetDown(OVRInput.Button.One) || abut.IsGrabbed()) {
             //    timeSinceLastInput = Time.time;
