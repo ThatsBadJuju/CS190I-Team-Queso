@@ -6,6 +6,7 @@ public class SwimmingWaypoints : MonoBehaviour
 {
     public GameObject[] waypoints;
     public SwimmingMan swimmingMan;
+    public Swimmer swimmer;
     private int current = 0;
     private float rotSpeed;
     public float speed;
@@ -29,6 +30,12 @@ public class SwimmingWaypoints : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
         transform.LookAt(waypoints[current].transform.position);
+
+        if (swimmer.drown)
+        {
+            speed = 0;
+        }
+        else speed = 1;
     }
 
 }
