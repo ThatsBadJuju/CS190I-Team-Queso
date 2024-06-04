@@ -7,7 +7,7 @@ public class SwimmingMan : MonoBehaviour
     public Swimmer swimmer;
     private float timer = 0f;
     private float drownTimer = 0f;
-    private bool decremented = false;
+    private bool incremented = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,12 +37,18 @@ public class SwimmingMan : MonoBehaviour
             drownTimer = 0;
             GameObject.Find("Scoreboard").GetComponent<Score>().fails++;
             GameObject.Find("Scoreboard text").GetComponent<WriteToScoreboard>().drownedTooLong++;
+            incremented = true;
         }
     }
 
     public void Reset()
     {
-        GameObject.Find("Scoreboard text").GetComponent<WriteToScoreboard>().drownedTooLong--;
+        if (incremented)
+        {
+            GameObject.Find("Scoreboard text").GetComponent<WriteToScoreboard>().drownedTooLong--;
+            incremented = false;
+        }
+        drownTimer = 0f;
         timer = Random.Range(30, 60);
     }
 }
