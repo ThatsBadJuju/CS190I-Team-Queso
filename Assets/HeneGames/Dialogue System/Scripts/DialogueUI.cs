@@ -51,6 +51,7 @@ namespace HeneGames.DialogueSystem
         [SerializeField] private GameObject dialogueWindow;
         [SerializeField] private GameObject interactionUI;
         [SerializeField] private GameObject incorrectUI;
+        [SerializeField] private GameObject modePanel;
 
         [Header("Settings")]
         [SerializeField] private bool animateText = true;
@@ -128,6 +129,15 @@ namespace HeneGames.DialogueSystem
                     wrong = false;
                     incorrectUI.SetActive(false);
                 }
+            }
+
+            if(sentenceIndex == 0)
+            {
+                modePanel.SetActive(false);
+            }
+            if(sentenceIndex == lastIndex)
+            {
+                modePanel.SetActive(true);
             }
         }
 
