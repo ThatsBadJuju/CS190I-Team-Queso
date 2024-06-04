@@ -28,6 +28,6 @@ public class RunningMan : MonoBehaviour
 
     public void Reset()
     {
-        timer = Random.Range(15, 30);
+        timer = Random.Range(15, 45);
     }
 }
